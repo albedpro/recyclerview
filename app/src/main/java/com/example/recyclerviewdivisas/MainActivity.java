@@ -5,10 +5,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -46,7 +46,14 @@ public class MainActivity extends AppCompatActivity {
         rv = findViewById(R.id.divisasEventsRecycler);
         botonMostrar = findViewById(R.id.button);
 
-
+        // Agrega el OnClickListener al botón
+        botonMostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mueve el código aquí
+                handleClick();
+            }
+        });
     }
 
     private void setDivisasEventModel() {
@@ -70,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
                     eventIc[i]
             ));
         }
-
     }
 
+    private void handleClick() {
+        // El código que deseas ejecutar cuando se hace clic en el botón
+            resultado.setText(HistoricEventRVAdapter.getResult());
+
+    }
 }

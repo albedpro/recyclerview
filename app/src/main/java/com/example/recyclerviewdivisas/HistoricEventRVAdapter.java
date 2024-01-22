@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class HistoricEventRVAdapter extends RecyclerView.Adapter<HistoricEventRVAdapter.MyViewHolder> {
     Context context;
+    public static String result;
     ArrayList<divisasEventModel> divisasEventModel;
 
     private int selectedPosition = RecyclerView.NO_POSITION;
@@ -23,6 +24,10 @@ public class HistoricEventRVAdapter extends RecyclerView.Adapter<HistoricEventRV
     public HistoricEventRVAdapter(Context context, ArrayList<divisasEventModel> divisasEventModel) {
         this.context = context;
         this.divisasEventModel = divisasEventModel;
+    }
+
+    public static String getResult() {
+        return result;
     }
 
     @NonNull
@@ -41,23 +46,21 @@ public class HistoricEventRVAdapter extends RecyclerView.Adapter<HistoricEventRV
 
         // Configurar el color de fondo según si está seleccionado o no
         holder.itemView.setBackgroundColor(position == selectedPosition ? Color.parseColor("#60D943") : Color.TRANSPARENT);
-
-        // Configurar el click listener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
                 handleClick(position);
                 if(MainActivity.VIPSwitch.isChecked()){
-                    MainActivity.resultado.setText(
+                    result=
                             Double.parseDouble(holder.tvPrecio.getText().toString()) *
-                                    Double.parseDouble(MainActivity.cantidad.getText().toString()) * 1.02 + ""
-                    );
+                                    Double.parseDouble(MainActivity.cantidad.getText().toString()) * 1.02 + "";
+
                 }else {
-                    MainActivity.resultado.setText(
+                    result=
                             Double.parseDouble(holder.tvPrecio.getText().toString()) *
-                                    Double.parseDouble(MainActivity.cantidad.getText().toString()) + ""
-                    );
+                                    Double.parseDouble(MainActivity.cantidad.getText().toString()) + "";
                 }
 
             }
@@ -94,7 +97,4 @@ public class HistoricEventRVAdapter extends RecyclerView.Adapter<HistoricEventRV
         notifyItemChanged(selectedPosition);
     }
 
-    public int getSelectedPosition() {
-        return selectedPosition;
-    }
 }
